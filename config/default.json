@@ -1,0 +1,6 @@
+{
+  "appConfig": {
+    "port": 4000
+  },
+  "dbConfig": {}
+}
