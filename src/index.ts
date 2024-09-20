@@ -1,22 +1,20 @@
-import app from "./app";
-import logger from "./config/logger";
-import config from "./config/config";
+import app from './app';
+import logger from './config/logger';
+import config from './config/config';
+import mongoose from 'mongoose';
 
-let server = app.listen(config.port, () => {
-  logger.info(`Listening to port ${config.port}`);
+let server: any;
+mongoose.connect(config.mongoose.url, config.mongoose.options).then(() => {
+  logger.info('Connected to MongoDB 📚');
+  server = app.listen(config.port, () => {
+    logger.info(`Listening to port ${config.port} ⚡`);
+  });
 });
-
-// mongoose.connect(config.mongoose.url, config.mongoose.options).then(() => {
-//   logger.info('Connected to MongoDB');
-//   server = app.listen(config.port, () => {
-//     logger.info(`Listening to port ${config.port}`);
-//   });
-// });
 
 const exitHandler = () => {
   if (server) {
     server.close(() => {
-      logger.info("Server closed");
+      logger.info('Server closed');
       process.exit(1);
     });
   } else {
@@ -29,11 +27,11 @@ const unexpectedErrorHandler = (error: any) => {
   exitHandler();
 };
 
-process.on("uncaughtException", unexpectedErrorHandler);
-process.on("unhandledRejection", unexpectedErrorHandler);
+process.on('uncaughtException', unexpectedErrorHandler);
+process.on('unhandledRejection', unexpectedErrorHandler);
 
-process.on("SIGTERM", () => {
-  logger.info("SIGTERM received");
+process.on('SIGTERM', () => {
+  logger.info('SIGTERM received');
   if (server) {
     server.close();
   }

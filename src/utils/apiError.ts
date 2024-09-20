@@ -3,7 +3,7 @@ class ApiError extends Error {
     statusCode: string | number,
     message: string,
     isOperational: boolean = true,
-    stack: string = ""
+    stack: string = '',
   ) {
     super(message);
     // @ts-ignore
@@ -18,4 +18,4 @@ class ApiError extends Error {
   }
 }
 
-module.exports = ApiError;
+export default ApiError;
