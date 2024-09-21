@@ -1,4 +1,4 @@
-import { Router } from "express";
+import { Router } from 'express';
 // const express = require('express');
 // const auth = require('../../middlewares/auth');
 // const validate = require('../../middlewares/validate');
@@ -6,6 +6,12 @@ import { Router } from "express";
 // const userController = require('../../controllers/user.controller');
 
 const router = Router();
+// /users
+
+router.get('/', (req, res) => {
+  res.send('hello');
+  // TODO logic for retrieving roles
+});
 
 // router
 //   .route('/')
@@ -19,6 +25,7 @@ const router = Router();
 //   .delete(auth('manageUsers'), validate(userValidation.deleteUser), userController.deleteUser);
 
 module.exports = router;
+export default router;
 
 // /**
 //  * @swagger

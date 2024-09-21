@@ -1,8 +1,9 @@
-import httpStatus from "http-status";
-import mongoose from "mongoose";
-import { Request, Response, NextFunction } from "express";
-import config from "../config/config";
-import logger from "../config/logger";
+import httpStatus from 'http-status';
+import mongoose from 'mongoose';
+import { Request, Response, NextFunction } from 'express';
+import config from '../config/config';
+import logger from '../config/logger';
+import ApiError from '../utils/apiError';
 
 // const config = require('../config/config');
 // const logger = require('../config/logger');
@@ -12,7 +13,7 @@ export const errorConverter = (
   err: any,
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
   let error = err;
   if (!(error instanceof ApiError)) {
@@ -31,10 +32,10 @@ export const errorHandler = (
   err: any,
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
   let { statusCode, message } = err;
-  if (config.env === "production" && !err.isOperational) {
+  if (config.env === 'production' && !err.isOperational) {
     statusCode = httpStatus.INTERNAL_SERVER_ERROR;
     message = httpStatus[httpStatus.INTERNAL_SERVER_ERROR];
   }
@@ -44,10 +45,10 @@ export const errorHandler = (
   const response = {
     code: statusCode,
     message,
-    ...(config.env === "development" && { stack: err.stack }),
+    ...(config.env === 'development' && { stack: err.stack }),
   };
 
-  if (config.env === "development") {
+  if (config.env === 'development') {
     logger.error(err);
   }
 

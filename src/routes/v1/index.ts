@@ -1,19 +1,21 @@
-import express, { Router } from "express";
-const authRoute = require("./auth.route");
-const userRoute = require("./user.route");
-const docsRoute = require("./docs.route");
-const config = require("../../config/config");
+import express from 'express';
+import config from '../../config/config';
+import userRoute from './user.route';
+
+const authRoute = require('./auth.route');
+const docsRoute = require('./docs.route');
 
 const router = express.Router();
 
 type TRouteType = { path: string; route: any }[];
+
 const defaultRoutes: TRouteType = [
   {
-    path: "/auth",
+    path: '/auth',
     route: authRoute,
   },
   {
-    path: "/users",
+    path: '/users',
     route: userRoute,
   },
 ];
@@ -21,7 +23,7 @@ const defaultRoutes: TRouteType = [
 const devRoutes: TRouteType = [
   // routes available only in development mode
   {
-    path: "/docs",
+    path: '/docs',
     route: docsRoute,
   },
 ];
@@ -31,7 +33,7 @@ defaultRoutes.forEach((route) => {
 });
 
 /* ignore next */
-if (config.env === "development") {
+if (config.env === 'development') {
   devRoutes.forEach((route) => {
     router.use(route.path, route.route);
   });
