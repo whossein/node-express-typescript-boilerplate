@@ -15,3 +15,4 @@ const pick = (object: Record<string, any>, keys: string[]) => {
 };
 
 module.exports = pick;
+export default pick;

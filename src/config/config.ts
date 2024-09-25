@@ -2,13 +2,14 @@ import dotenv from 'dotenv';
 import path from 'path';
 import Joi from 'joi';
 import { MongooseOptions } from 'mongoose';
+import { Environment } from './constants';
 
 dotenv.config({ path: path.join(__dirname, '../../.env') });
 
 const envVarsSchema = Joi.object()
   .keys({
     NODE_ENV: Joi.string()
-      .valid('production', 'development', 'test')
+      .valid(Environment.production, Environment.development, Environment.test)
       .required(),
     PORT: Joi.number().default(3000),
     MONGODB_URL: Joi.string().required().description('Mongo DB url'),
@@ -51,7 +52,9 @@ export const config = {
   env: envVars.NODE_ENV,
   port: envVars.PORT,
   mongoose: {
-    url: envVars.MONGODB_URL + (envVars.NODE_ENV === 'test' ? '-test' : ''),
+    url:
+      envVars.MONGODB_URL +
+      (envVars.NODE_ENV === Environment.test ? `-${Environment.test}` : ''),
     options: mongodbOptions,
   },
   jwt: {

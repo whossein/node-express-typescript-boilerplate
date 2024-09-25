@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from "express";
+import { Request, Response, NextFunction } from 'express';
 
 const catchAsync =
   (fn: Function) => (req: Request, res: Response, next: NextFunction) => {
@@ -6,3 +6,4 @@ const catchAsync =
   };
 
 module.exports = catchAsync;
+export default catchAsync;

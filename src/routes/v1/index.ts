@@ -1,6 +1,7 @@
 import express from 'express';
 import config from '../../config/config';
 import userRoute from './user.route';
+import { Environment } from '../../config/constants';
 
 const authRoute = require('./auth.route');
 const docsRoute = require('./docs.route');
@@ -33,7 +34,7 @@ defaultRoutes.forEach((route) => {
 });
 
 /* ignore next */
-if (config.env === 'development') {
+if (config.env === Environment.development) {
   devRoutes.forEach((route) => {
     router.use(route.path, route.route);
   });

@@ -1,13 +1,9 @@
 import httpStatus from 'http-status';
 import mongoose from 'mongoose';
 import { Request, Response, NextFunction } from 'express';
-import config from '../config/config';
-import logger from '../config/logger';
+import { config, logger } from '../config';
 import ApiError from '../utils/apiError';
-
-// const config = require('../config/config');
-// const logger = require('../config/logger');
-// const ApiError = require('../utils/ApiError');
+import { Environment } from '../config/constants';
 
 export const errorConverter = (
   err: any,
@@ -45,10 +41,10 @@ export const errorHandler = (
   const response = {
     code: statusCode,
     message,
-    ...(config.env === 'development' && { stack: err.stack }),
+    ...(config.env === Environment.development && { stack: err.stack }),
   };
 
-  if (config.env === 'development') {
+  if (config.env === Environment.development) {
     logger.error(err);
   }
 
