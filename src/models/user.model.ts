@@ -13,8 +13,16 @@ export interface IUser {
   isEmailVerified: boolean;
 }
 
+export interface IUserFilter {}
+export interface IUserOptions {
+  sortBy?: 'desc' | 'asc';
+  limit?: number;
+  page?: number;
+}
+
 interface UserModel extends Model<IUser> {
   isEmailTaken(email: string, excludeUserId?: ObjectId): boolean;
+  paginate(filter: IUserFilter, options: IUserOptions): Promise<IUser[]>;
 }
 
 const userSchema = new Schema<IUser, UserModel>(
