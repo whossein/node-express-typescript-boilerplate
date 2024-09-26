@@ -2,41 +2,69 @@ import httpStatus from 'http-status';
 import { ApiError, pick, catchAsync } from '../utils';
 import { userService } from '../services';
 import { Request, Response } from 'express';
+import { ObjectId } from 'mongoose';
 
-const createUser = catchAsync(async (req: Request, res: Response) => {
+export const createUser = catchAsync(async (req: Request, res: Response) => {
   const user = await userService.createUser(req.body);
   res.status(httpStatus.CREATED).send(user);
 });
 
-const getUsers = catchAsync(async (req: Request, res: Response) => {
+export const getUsers = catchAsync(async (req: Request, res: Response) => {
   const filter = pick(req.query, ['name', 'role']);
   const options = pick(req.query, ['sortBy', 'limit', 'page']);
   const result = await userService.queryUsers(filter, options);
   res.send(result);
 });
 
-// const getUser = catchAsync(async (req: Request, res: Response) => {
-//   const user = await userService.getUserById(req.params.userId);
-//   if (!user) {
-//     throw new ApiError(httpStatus.NOT_FOUND, 'User not found');
-//   }
-//   res.send(user);
-// });
+type ReqDictionary = { userId?: ObjectId };
+type ReqBody = {};
+type ReqQuery = { userId?: ObjectId };
+type ResBody = {};
+type TRequestUserId = Request<ReqDictionary, ResBody, ReqBody, ReqQuery>;
 
-// const updateUser = catchAsync(async (req: Request, res: Response) => {
-//   const user = await userService.updateUserById(req.params.userId, req.body);
-//   res.send(user);
-// });
+export const getUser = catchAsync(
+  async (req: TRequestUserId, res: Response) => {
+    if (req?.params?.userId) {
+      const user = await userService.getUserById(req.params.userId);
+      if (!user) {
+        throw new ApiError(httpStatus.NOT_FOUND, 'User not found');
+      }
+      res.send(user);
+    } else {
+      throw new ApiError(httpStatus.NOT_FOUND, 'User Id not found');
+    }
+  },
+);
 
-// const deleteUser = catchAsync(async (req: Request, res: Response) => {
-//   await userService.deleteUserById(req.params.userId);
-//   res.status(httpStatus.NO_CONTENT).send();
-// });
+export const updateUser = catchAsync(
+  async (req: TRequestUserId, res: Response) => {
+    if (req?.params?.userId) {
+      const user = await userService.updateUserById(
+        req.params.userId,
+        req.body,
+      );
+      res.send(user);
+    } else {
+      throw new ApiError(httpStatus.NOT_FOUND, 'User Id not found');
+    }
+  },
+);
 
-// module.exports = {
-//   createUser,
-//   getUsers,
-//   getUser,
-//   updateUser,
-//   deleteUser,
-// };
+export const deleteUser = catchAsync(
+  async (req: TRequestUserId, res: Response) => {
+    if (req.params.userId) {
+      await userService.deleteUserById(req.params.userId);
+      res.status(httpStatus.NO_CONTENT).send();
+    } else {
+      throw new ApiError(httpStatus.NOT_FOUND, 'User Id not found');
+    }
+  },
+);
+
+module.exports = {
+  createUser,
+  getUsers,
+  getUser,
+  updateUser,
+  deleteUser,
+};

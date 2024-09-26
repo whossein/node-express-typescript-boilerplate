@@ -1,7 +1,8 @@
-- imp user api
+- test app and user id api's
 
-- imp mongodb models, schemes
-- fix eslint issues
+- add nodemon
 - imp swagger ui
 - imp auth api
 - imp role api
+
+- fix eslint issues
