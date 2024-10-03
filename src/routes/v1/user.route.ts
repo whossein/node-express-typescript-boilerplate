@@ -1,14 +1,11 @@
 import { Router } from 'express';
 import auth from '../../middlewares/auth';
-import express from 'express';
 import validate from '../../middlewares/validate';
-import userValidation from '../../validations/user.validation';
+import { userValidation } from '../../validations';
 import { userController } from '../../controllers';
 
-// const userController = require('../../controllers/user.controller');
-
-const router = Router();
 // /v1/users
+const router = Router();
 
 router
   .route('/')
