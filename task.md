@@ -1,4 +1,3 @@
-- imp config/tokens
 - imp token service
 - imp email service
 - imp auth service
@@ -14,3 +13,4 @@
 
 - fix eslint issues
 - create and handle index file in all folder, fix import from index files
+- fix export default, export default {functions...}

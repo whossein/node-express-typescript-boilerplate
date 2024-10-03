@@ -82,6 +82,15 @@ export const deleteUserById = async (userId: ObjectId) => {
   return user;
 };
 
+export default {
+  createUser,
+  queryUsers,
+  getUserById,
+  getUserByEmail,
+  updateUserById,
+  deleteUserById,
+};
+
 module.exports = {
   createUser,
   queryUsers,

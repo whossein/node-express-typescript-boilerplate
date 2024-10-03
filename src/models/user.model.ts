@@ -20,12 +20,12 @@ export interface IUserOptions {
   page?: number;
 }
 
-interface UserModel extends Model<IUser> {
+interface IUserModel extends Model<IUser> {
   isEmailTaken(email: string, excludeUserId?: ObjectId): boolean;
   paginate(filter: IUserFilter, options: IUserOptions): Promise<IUser[]>;
 }
 
-const userSchema = new Schema<IUser, UserModel>(
+const userSchema = new Schema<IUser, IUserModel>(
   {
     name: {
       type: String,
@@ -100,7 +100,7 @@ userSchema.pre('save', async function (next) {
   next();
 });
 
-const User = model<IUser, UserModel>('User', userSchema);
+const User = model<IUser, IUserModel>('User', userSchema);
 
 module.exports = User;
 export default User;
