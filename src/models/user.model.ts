@@ -6,6 +6,7 @@ import { roles } from '../config/roles';
 import mongoosePaginate from 'mongoose-paginate-v2';
 
 export interface IUser {
+  id: ObjectId;
   name: string;
   email: string;
   password?: string;

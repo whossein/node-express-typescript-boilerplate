@@ -1,11 +1,11 @@
-import mongoose, { Model, Schema } from 'mongoose';
+import mongoose, { model, Model, Schema } from 'mongoose';
 import { toJSON } from './plugins';
 import { tokenTypes } from '../config/tokens';
 
 export interface ITokenSchema {
   token: string;
   user: string;
-  type: typeof tokenTypes;
+  type: tokenTypes;
   expires: string;
   blacklisted: boolean;
 }
@@ -48,11 +48,14 @@ const tokenSchema = new Schema(
 );
 
 // add plugin that converts mongoose to json
+// @ts-ignore
 tokenSchema.plugin(toJSON);
 
 /**
  * @typedef Token
  */
-const Token = mongoose.model('Token', tokenSchema);
 
+const Token = model<ITokenSchema, ITokenModel>('Token', tokenSchema);
+
+export default Token;
 module.exports = Token;
