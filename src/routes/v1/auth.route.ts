@@ -4,6 +4,7 @@ import authValidation from '../../validations/auth.validation';
 import authController from '../../controllers/auth.controller';
 import auth from '../../middlewares/auth';
 
+// /v1/auth/
 const router = Router();
 
 router.post(

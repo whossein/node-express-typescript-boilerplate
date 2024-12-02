@@ -7,8 +7,8 @@ import { Request, Response, NextFunction } from 'express';
 const verifyCallback =
   (
     req: Request,
-    resolve: () => typeof Promise.resolve,
-    reject: (error: ApiError) => typeof Promise.reject,
+    resolve: (val?: unknown) => void,
+    reject: (error?: ApiError) => void,
     requiredRights: string[],
   ) =>
   async (err: any, user: any, info: any) => {
@@ -40,7 +40,6 @@ const auth =
       passport.authenticate(
         'jwt',
         { session: false },
-        // @ts-ignore
         verifyCallback(req, resolve, reject, requiredRights),
       )(req, res, next);
     })

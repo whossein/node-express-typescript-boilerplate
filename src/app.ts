@@ -12,6 +12,7 @@ import httpStatus from 'http-status';
 import { errorConverter, errorHandler } from './middlewares/error';
 import mongoSanitize from 'express-mongo-sanitize';
 import ApiError from './utils/apiError.js';
+import { jwtStrategy } from './config/passport';
 
 const app = express();
 
@@ -44,12 +45,14 @@ app.options('*', cors());
 
 // jwt authentication
 app.use(passport.initialize());
+passport.use('jwt', jwtStrategy);
 // passport.use(
-//   "jwt",
+//   'jwt',
+//   // config.jwt
 //   new JWTStrategy({
 //     jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-//     secretOrKey: process.env.SECRET_KEY || "jvns",
-//   })
+//     secretOrKey: process.env.SECRET_KEY || 'jvns',
+//   }),
 // );
 
 // limit repeated failed requests to auth endpoints
