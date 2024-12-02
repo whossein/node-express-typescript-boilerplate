@@ -48,8 +48,7 @@ const tokenSchema = new Schema(
 );
 
 // add plugin that converts mongoose to json
-// @ts-ignore
-tokenSchema.plugin(toJSON);
+tokenSchema.plugin(toJSON.default);
 
 /**
  * @typedef Token

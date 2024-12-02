@@ -58,3 +58,13 @@ module.exports = {
   resetPassword,
   verifyEmail,
 };
+
+export default {
+  register,
+  login,
+  logout,
+  refreshTokens,
+  forgotPassword,
+  resetPassword,
+  verifyEmail,
+};

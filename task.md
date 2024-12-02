@@ -1,8 +1,3 @@
-- imp token service
-- imp email service
-- imp auth service
-- authController
-
 - test app and user id api's
 
 - imp swagger ui

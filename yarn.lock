@@ -574,6 +574,13 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-10.17.60.tgz#35f3d6213daed95da7f0f73e75bcc6980e90597b"
   integrity sha512-F0KIgDJfy2nA3zMLmWGKxcH2ZVEtCZXHHdOQs2gSaQ27+lNeEfGxzkIw90aXswATX7AZ33tahPbzy6KAfUreVw==
 
+"@types/nodemailer@^6.4.16":
+  version "6.4.16"
+  resolved "https://registry.yarnpkg.com/@types/nodemailer/-/nodemailer-6.4.16.tgz#db006abcb1e1c8e6ea2fb53b27fefec3c03eaa6c"
+  integrity sha512-uz6hN6Pp0upXMcilM61CoKyjT7sskBoOWpptkjjJp8jIMlTdc3xG01U7proKkXzruMS4hS0zqtHNkNPFB20rKQ==
+  dependencies:
+    "@types/node" "*"
+
 "@types/passport-jwt@^4.0.1":
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/@types/passport-jwt/-/passport-jwt-4.0.1.tgz#080fbe934fb9f6954fb88ec4cdf4bb2cc7c4d435"
@@ -2544,6 +2551,11 @@ node-ts@^6.1.2:
   dependencies:
     "@rauschma/stringio" "^1.4.0"
     "@types/node" "^22.6.0"
+
+nodemailer@^6.9.15:
+  version "6.9.15"
+  resolved "https://registry.yarnpkg.com/nodemailer/-/nodemailer-6.9.15.tgz#57b79dc522be27e0e47ac16cc860aa0673e62e04"
+  integrity sha512-AHf04ySLC6CIfuRtRiEYtGEXgRfa6INgWGluDhnxTZhHSKvrBu7lc1VVchQ0d8nPc4cFaZoPq8vkyNoZr0TpGQ==
 
 nodemon@^3.1.4:
   version "3.1.7"

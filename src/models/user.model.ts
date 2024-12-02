@@ -20,10 +20,10 @@ export interface IUserOptions {
   limit?: number;
   page?: number;
 }
-
 interface IUserModel extends Model<IUser> {
   isEmailTaken(email: string, excludeUserId?: ObjectId): boolean;
   paginate(filter: IUserFilter, options: IUserOptions): Promise<IUser[]>;
+  isPasswordMatch(password: string): Promise<boolean>;
 }
 
 const userSchema = new Schema<IUser, IUserModel>(
